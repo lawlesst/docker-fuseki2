@@ -1,0 +1,5 @@
+#macos x
+.DS_Store
+
+#vagrant
+.vagrant/
