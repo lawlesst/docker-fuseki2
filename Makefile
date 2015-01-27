@@ -16,9 +16,9 @@ build:                                                     ## Build the docker i
 	vagrant ssh vm-fuseki -c "sudo docker build -t brinxmat/docker-fuseki2:latest /vagrant | tee -a build.log"
 
 ui:                                                        ## Open UI
-	vagrant ssh vm-fuseki -c "sudo apt-get install -y firefox && firefox http://127.0.0.1:3030"
+	vagrant ssh vm-fuseki -c "sudo apt-get install -y firefox && firefox http://localhost:3030"
 
 load_docker:                                               ## Load the latest docker image
-	vagrant ssh vm-fuseki -c "sudo docker run -d -p 3030:3030 brinxmat/docker-fuseki2:latest"
+	vagrant ssh vm-fuseki -c "sudo docker run -d --net="host" -p 3030:3030 brinxmat/docker-fuseki2:latest"
 
 run_fuseki: load_docker ui                                 ## Load docker image and open ui
