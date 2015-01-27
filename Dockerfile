@@ -22,7 +22,6 @@ RUN chmod +x /opt/fuseki2/jena-fuseki-dist-2.0.0-SNAPSHOT/fuseki-server
 
 RUN rm -R /working
 
-ADD config.ttl /opt/fuseki2/jena-fuseki-dist-2.0.0-SNAPSHOT/user_config.ttl
 ADD startup.sh /opt/fuseki2/jena-fuseki-dist-2.0.0-SNAPSHOT/startup.sh
 RUN chmod +x /opt/fuseki2/jena-fuseki-dist-2.0.0-SNAPSHOT/startup.sh
 
