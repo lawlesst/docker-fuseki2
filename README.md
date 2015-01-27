@@ -7,6 +7,16 @@ If you're interested in helping or are looking for specific features, submit an 
 
 The home for the project (and a development environment) can be found in [this github repo](https://github.com/brinxmat/docker-fuseki2/).
 
+##Running from Dockerhub
+
+Running the image from [https://registry.hub.docker.com/u/brinxmat/docker-fuseki2/](Dockerhub) (assuming you've installed docker):
+```
+term$ sudo docker run -d --net="host" -p 3030:3030 brinxmat/docker-fuseki2:latest
+```
+Note that the ports are set to the fuseki default 3030 (accessed via eg. [http://127.0.0.1:3030](http://127.0.0.1:3030)).
+
+Note also that the --net="host" flag is important because of the way loopbacks are handled in docker.
+
 ##Development quickstart
 
 1. Install vagrant
