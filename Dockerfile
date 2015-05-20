@@ -1,31 +1,30 @@
-FROM debian:jessie
+FROM java:openjdk-8-jre
 
-MAINTAINER Rurik Thomas Greenall <rurik.greenall@computas.com>
+env FUSEKI_VERSION apache-jena-fuseki-2.0.0
+env FUSEKI /opt/fuseki2
+env FUSEKI_ROOT $FUSEKI/$FUSEKI_VERSION
 
-RUN DEBIAN_FRONTEND=noninteractive \
-    apt-get update && \
-    apt-get install -y tar locales git openjdk-7-jre-headless maven
+RUN echo "Installing Fuseki 2 -- $FUSEKI_VERSION"
 
-RUN dpkg-reconfigure locales && \
-    locale-gen C.UTF-8 && \
-    /usr/sbin/update-locale LANG=C.UTF-8
-ENV LC_ALL C.UTF-8
+RUN mkdir /working && cd /working
+RUN curl -sS http://apache.mirrors.lucidnetworks.net/jena/binaries/$FUSEKI_VERSION.zip > temp.zip
+RUN unzip temp.zip -d $FUSEKI
+#RUN mkdir /opt/fuseki2
+#RUN mv /working/$FUSEKI_VERSION/ $FUSEKI/
 
-
-RUN mkdir /working && cd /working && git clone https://github.com/apache/jena.git
-RUN cd /working/jena/jena-fuseki2/jena-fuseki-dist/ && mvn clean install 
-RUN mkdir /opt/fuseki2
-
-RUN tar -zxvf /working/jena/jena-fuseki2/jena-fuseki-dist/target/jena-fuseki-dist-2.0.0-SNAPSHOT.tar.gz -C /opt/fuseki2
-
-RUN chmod +x /opt/fuseki2/jena-fuseki-dist-2.0.0-SNAPSHOT/fuseki-server
+RUN chmod +x $FUSEKI_ROOT/fuseki-server
 
 RUN rm -R /working
 
-ADD startup.sh /opt/fuseki2/jena-fuseki-dist-2.0.0-SNAPSHOT/startup.sh
-RUN chmod +x /opt/fuseki2/jena-fuseki-dist-2.0.0-SNAPSHOT/startup.sh
+ADD startup.sh $FUSEKI_ROOT/startup.sh
+RUN chmod +x $FUSEKI_ROOT/startup.sh
+
+ADD fuseki-fulltext-config.ttl $FUSEKI_ROOT/fuseki-fulltext-config.ttl
+ADD shiro.ini $FUSEKI_ROOT/run/shiro.ini
 
 RUN mkdir /data
 VOLUME /data
 EXPOSE 3030
-CMD ["/opt/fuseki2/jena-fuseki-dist-2.0.0-SNAPSHOT/startup.sh"]
+#This doesn't seem to be able to read env vars
+CMD ["/opt/fuseki2/apache-jena-fuseki-2.0.0/startup.sh"]
+#CMD ["$FUSEKI_ROOT/startup.sh"]
