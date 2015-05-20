@@ -1,6 +1,6 @@
 # docker-fuseki2 — Docker image for Jena Fuseki2
 
-This is forked from Rurik Grinwall's [docker-fuseki2](https://github.com/brinxmat/docker-fuseki2/) project.
+This is forked from Rurik Greenall's [docker-fuseki2](https://github.com/brinxmat/docker-fuseki2/) project.  Thanks to Rurik for making his work available.
 
 This is intended to be used for development, testing, and learning only.  The Fuseki security has been configured to allow all connections.
 
