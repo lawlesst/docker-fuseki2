@@ -1,6 +1,6 @@
 FROM java:openjdk-8-jre
 # fix startup
-ENV FUSEKI_VERSION apache-jena-fuseki-2.4.0
+ENV FUSEKI_VERSION apache-jena-fuseki-2.5.0
 ENV FUSEKI /opt/fuseki2
 ENV FUSEKI_ROOT ${FUSEKI}/${FUSEKI_VERSION}
 
@@ -25,4 +25,4 @@ VOLUME /data
 EXPOSE 3030
 #This doesn't seem to be able to read ENV vars
 #CMD ["${FUSEKI_ROOT}/startup.sh"]
-CMD ["/opt/fuseki2/apache-jena-fuseki-2.4.0/startup.sh"]
+CMD ["/opt/fuseki2/apache-jena-fuseki-2.5.0/startup.sh"]
