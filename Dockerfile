@@ -1,13 +1,13 @@
 FROM java:openjdk-8-jre
 # fix startup
-ENV FUSEKI_VERSION apache-jena-fuseki-2.5.0
+ENV FUSEKI_VERSION apache-jena-fuseki-3.7.0
 ENV FUSEKI /opt/fuseki2
 ENV FUSEKI_ROOT ${FUSEKI}/${FUSEKI_VERSION}
 
 RUN echo "Installing Fuseki 2 -- ${FUSEKI_VERSION}"
 
 RUN mkdir /working && cd /working
-RUN curl -sS http://apache.mirrors.lucidnetworks.net/jena/binaries/${FUSEKI_VERSION}.zip > temp.zip
+RUN curl -sS http://archive.apache.org/dist/jena/binaries/${FUSEKI_VERSION}.zip > temp.zip
 RUN unzip temp.zip -d ${FUSEKI}
 
 RUN chmod +x ${FUSEKI_ROOT}/fuseki-server
@@ -25,4 +25,4 @@ VOLUME /data
 EXPOSE 3030
 #This doesn't seem to be able to read ENV vars
 #CMD ["${FUSEKI_ROOT}/startup.sh"]
-CMD ["/opt/fuseki2/apache-jena-fuseki-2.5.0/startup.sh"]
+CMD ["/opt/fuseki2/apache-jena-fuseki-3.7.0/startup.sh"]
