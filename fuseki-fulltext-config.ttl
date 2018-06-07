@@ -9,7 +9,7 @@
 
 ## Example of a TDB dataset and text index
 ## Initialize TDB
-[] ja:loadClass "org.apache.jena.tdb.TDB.tdb.TDB" .
+[] ja:loadClass "org.apache.jena.tdb.TDB" .
 tdb:DatasetTDB  rdfs:subClassOf  ja:RDFDataset .
 tdb:GraphTDB    rdfs:subClassOf  ja:Model .
 
